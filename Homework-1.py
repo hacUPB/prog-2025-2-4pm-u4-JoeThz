@@ -26,6 +26,7 @@ tramos_combustible = [2400, 3000, 2800, 2000]  # L
 # resultado = analizar_eficiencia(tramos_distancia, tramos_combustible)
 # print(resultado)
 
+
 #### Ejercicio 2: Selección de cajas para carga en una aeronave
 
 #En una operación de carga aérea, se tiene una lista de cajas, cada una con un peso diferente. 
@@ -50,6 +51,7 @@ pesos_cajas = [120, 400, 300, 180, 450, 200]
 peso_max_avion = 1000
 
 cargar_cajas(pesos_cajas, peso_max_avion)
+
 
 #### **Ejercicio 3: Análisis de trayectoria**
 
