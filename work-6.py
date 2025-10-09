@@ -19,10 +19,7 @@ def simular_etapa(etapa_actual, cant_comb, comb_restante, porcentaje, total_etap
     comb_cons = int((porcentaje/100) * cant_comb)
     
     if comb_cons > comb_restante:
-        return {
-            "error": True,
-            "mensaje": f"Combustible insuficiente. Se necesitan {comb_cons} toneladas pero solo quedan {comb_restante} toneladas"
-        }
+        return {"error": True,"mensaje": f"Combustible insuficiente. Se necesitan {comb_cons} toneladas pero solo quedan {comb_restante} toneladas"}
     
     eficiencia = calcular_eficiencia(etapa_actual, total_etapas)
     tiempo_etapa = calcular_tiempo_etapa(etapa_actual)
@@ -35,16 +32,7 @@ def simular_etapa(etapa_actual, cant_comb, comb_restante, porcentaje, total_etap
     velocidad_etapa = distancia_etapa / tiempo_etapa if tiempo_etapa > 0 else 0
     comb_restante -= comb_cons
 
-    return {
-        "error": False,
-        "combustible_consumido": comb_cons,
-        "porcentaje": porcentaje,
-        "eficiencia": eficiencia,
-        "tiempo": tiempo_etapa,
-        "distancia": distancia_etapa,
-        "velocidad": velocidad_etapa,
-        "combustible_restante": comb_restante
-    }
+    return {"error": False,"combustible_consumido": comb_cons,"porcentaje": porcentaje,"eficiencia": eficiencia,"tiempo": tiempo_etapa,"distancia": distancia_etapa,"velocidad": velocidad_etapa,"combustible_restante": comb_restante}
 
 def mostrar_datos_etapa(num_etapa, datos):
     print(f"\nEtapa {num_etapa}:")
@@ -102,13 +90,7 @@ def simular_cohete():
     porcentajes = obtener_distribucion_combustible(cant_etapas)
     
     for etapa_actual in range(1, cant_etapas + 1):
-        datos_etapa = simular_etapa(
-            etapa_actual,
-            cant_comb,
-            comb_restante,
-            porcentajes[etapa_actual - 1],
-            cant_etapas
-        )
+        datos_etapa = simular_etapa(etapa_actual,cant_comb,comb_restante,porcentajes[etapa_actual - 1],cant_etapas)
         
         if datos_etapa.get("error"):
             print(f"\nAdvertencia: {datos_etapa['mensaje']}")
@@ -130,6 +112,32 @@ def simular_cohete():
         print("\n¡Éxito! El cohete ha alcanzado el espacio (>100 km)")
     else:
         print("\nEl cohete no alcanzó el espacio (<100 km)")
+    return etapas_data
 
-if __name__ == "__main__":
-    simular_cohete()
+
+# En la opción 2 se imprimen todos los elementos del diccionario, uno al frente del otro.
+
+numero = (int(input("-----Menú----- \n1. Simulación de lanzamiento de cohete por etapas \n2. Mostrar datos \n3. Salir \n Seleccione una opción:")))
+etapas_info = {}
+while True:
+    match numero:
+        case 1:
+            print("Ha escogido simulación del cohete por etapas")
+            if __name__ == "__main__":
+              etapas_info = simular_cohete()
+        case 2:
+            print(f"Ha escogido ver los datos.")
+            if etapas_info:
+                for etapa, data in etapas_info.items():
+                    print(f"\nDatos de la Etapa {etapa}:")
+                    for key, value in data.items():
+                        print(f"  {key}: {value}")
+            else:
+                print("Primero debe realizar una simulación (opción 1) para generar los datos.")
+            break
+        case 3: 
+            print("Ha salido.")
+            break
+        case _: 
+            print("Ingrese un número valido")
+            break

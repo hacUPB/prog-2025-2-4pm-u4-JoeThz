@@ -53,12 +53,7 @@ def calcular_tiempo_etapa(num_etapa):
 def simular_etapa(etapa_actual, cant_comb, comb_restante, porcentaje, total_etapas):
     comb_cons = int((porcentaje/100) * cant_comb)
     
-    if comb_cons > comb_restante:
-        return {
-            "error": True,
-            "mensaje": f"Combustible insuficiente. Se necesitan {comb_cons} toneladas pero solo quedan {comb_restante} toneladas"
-        }
-    
+
     eficiencia = calcular_eficiencia(etapa_actual, total_etapas)
     tiempo_etapa = calcular_tiempo_etapa(etapa_actual)
     
@@ -70,16 +65,7 @@ def simular_etapa(etapa_actual, cant_comb, comb_restante, porcentaje, total_etap
     velocidad_etapa = distancia_etapa / tiempo_etapa if tiempo_etapa > 0 else 0
     comb_restante -= comb_cons
 
-    return {
-        "error": False,
-        "combustible_consumido": comb_cons,
-        "porcentaje": porcentaje,
-        "eficiencia": eficiencia,
-        "tiempo": tiempo_etapa,
-        "distancia": distancia_etapa,
-        "velocidad": velocidad_etapa,
-        "combustible_restante": comb_restante
-    }
+    return {"error": False,"combustible_consumido": comb_cons,"porcentaje": porcentaje,"eficiencia": eficiencia,"tiempo": tiempo_etapa,"distancia": distancia_etapa,"velocidad": velocidad_etapa,"combustible_restante": comb_restante}
 
 
 def mostrar_datos_etapa(num_etapa, datos):
